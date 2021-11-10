@@ -6,8 +6,10 @@ import {
 } from "@rarible/protocol-ethereum-sdk"
 import { toAddress, toBigNumber } from "@rarible/types"
 import { NftCollection_Type, NftItem } from "@rarible/protocol-api-client"
-import { debounce } from "./utils/debounce"
-import { retry } from "./utils/retry"
+import { debounce } from "../../utils/debounce"
+import { retry } from "../../utils/retry"
+import { degrees, PDFDocument, StandardFonts, rgb } from 'pdf-lib'
+import reactpdf from 'react-pdf';
 
 type CreateOrderFormState = {
 	contract: string,
@@ -232,6 +234,28 @@ const Dashboard: React.FC<DashboardProps> = ({ provider, sdk, accounts }) => {
 	const handlePurchaseOrderAmount = (e: React.FormEvent<HTMLInputElement>): void => {
 		setPurchaseOrderForm({ ...createOrderForm, amount: e.currentTarget.value })
 	}
+
+	async function modifyPdf() {
+		const url = 'https://pdf-lib.js.org/assets/with_update_sections.pdf'
+		const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
+	  
+		const pdfDoc = await PDFDocument.load(existingPdfBytes)
+		const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica)
+	  
+		const pages = pdfDoc.getPages()
+		const firstPage = pages[0]
+		const { width, height } = firstPage.getSize()
+		firstPage.drawText('This text was added with JavaScript!', {
+		  x: 5,
+		  y: height / 2 + 300,
+		  size: 50,
+		  font: helveticaFont,
+		  color: rgb(0.95, 0.1, 0.1),
+		  rotate: degrees(-45),
+		})
+	  
+		const pdfBytes = await pdfDoc.save()
+	  }
 	return (
 		<div className="App">
 			<div>

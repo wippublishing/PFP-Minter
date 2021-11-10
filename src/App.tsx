@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Web3 from "web3"
 import { createRaribleSdk, RaribleSdk } from "@rarible/protocol-ethereum-sdk"
 import './App.css'
-import Dashboard from "./Dashboard"
+import Dashboard from "./components/Dashboard/Dashboard"
 import { Web3Ethereum } from "@rarible/web3-ethereum"
 
 const NETWORK = "rinkeby"

@@ -1,4 +1,23 @@
-# Rarible protocol ethereum sdk react example
+# PFP Book Minter using Rarible Protocol and IPFS Submarining
+
+prerequisites: set up pro pinata plan (thanks @Dylan for the osmo)
+
+1️⃣ integrate https://github.com/rarible/protocol-example with
+-A- https://github.com/wojtekmaj/react-pdf (for displaying portions of minted pdf)
+------ test out IPFS submarining and mod forked code for display https://medium.com/pinata/how-to-manage-nft-visibility-18e9b7a76b8c
+------ use upload code like this: https://gist.github.com/polluterofminds/b1af5cd419cb878637c52158c0ebccb0#file-upload-js
+-B- https://github.com/NoahZinsmeister/web3-react/tree/v6/docs#example (for multiple web3 login support)
+-C- https://github.com/styleguidist/react-styleguidist (for independent component styling and preview)
+-D- https://pdfkit.org/docs/getting_started.html - pdf modification, store base pdf in folder on server side
+
+2️⃣ fork and modify base rarible 721 contract to
+-A- include claim/mint functions https://ryan-foo.medium.com/adding-a-price-multiple-mints-to-your-erc721-token-contract-506ade96235
+-B- set contract metadata to point to IPFS base URI for project https://gist.github.com/polluterofminds/14cce6e693460f80b60b686fc15c9abf#file-metadata-js
+
+3️⃣ implement api for viewer - https://gist.github.com/polluterofminds/c881a794b9b0e330352364b8aeadb935#file-index-js (serves the file with valid access token) - this url will be used by the pdf viewer. An alternate shorter sample will be used for non-owners 
+
+------
+**note: lots of stuff below will change**
 
 In this example we're using [Metamask](https://metamask.io/) wallet to interact with ethereum blockchain.
 
